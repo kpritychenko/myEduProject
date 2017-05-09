@@ -6,7 +6,7 @@ var appendElement = function(parent, child) {
 };
 
 const table = document.getElementById('vacancy-list');
-const url = "http://api.zp.ru/v1/vacancies/";
+const url = "https://api.zp.ru/v1/vacancies/";
 
 fetch(url)
 .then((response) => {
