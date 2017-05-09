@@ -1,0 +1,39 @@
+body {
+    background-color: #ebebeb;
+   }
+h1 {
+	font-size: 24px;
+	font-family: Lato,Helvetica Neue,Arial,Helvetica,sans-serif;
+}
+.main-logo {
+ 	display: block;
+ 	width: 204px; 
+ 	height: 35px;
+ 	padding: 10px;
+ 	margin: auto;
+}
+.table{
+   display: table;   
+   width:100%;
+}
+.row {
+  	display: table-row;
+  	line-height: 100px;
+  	background-color: #cccccc;
+}
+.date {
+ 	display:table-cell;
+ 	width:25%;
+ 	font-family: Lato,Helvetica Neue,Arial,Helvetica,sans-serif;
+}
+.header {
+	display:table-cell;
+	font-family: Lato,Helvetica Neue,Arial,Helvetica,sans-serif;
+}
+.logo {
+	display:table-cell;
+	width:15%
+}
+.logo img {
+	vertical-align: middle;
+}
