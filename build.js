@@ -63,66 +63,94 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports) {
 
-var createElement = function(element) {
-	return document.createElement(element);
+var fetchApi = function (url) {
+    return fetch(url).then(response => {
+        return response.json();
+    });
 };
-var appendElement = function(parent, child) {
-	return parent.appendChild(child);
+module.exports = fetchApi;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const dateFormatter = __webpack_require__(2);
+var createElement = function (element) {
+    return document.createElement(element);
+};
+var appendElement = function (parent, child) {
+    return parent.appendChild(child);
 };
 
 const table = document.getElementById('vacancy-list');
+
+//var cardLink = item.utl;
+
+
+var renderList = function (data) {
+    var vacancy = data.vacancies;
+    return vacancy.map(function (item) {
+        var href = "https://www.zarplata.ru" + item.url;
+        var src;
+        item.company.logo === null || item.company.logo.url === null ? src = "static/icon/company-no-logo.svg" : src = item.company.logo.url;
+        var date = dateFormatter(item.add_date);
+
+        var tableRow = createElement('div');
+        tableRow.innerHTML = '<div class="row"> \
+            <div class="date"> \
+                <span>' + 'Дата добавления: <br>' + date + '</span> \
+            </div> \
+            <div class="header">\
+                <a target="_blank" href="' + href + '">\
+                    <span>' + item.header + '</span>\
+                </a>\
+            </div> \
+            <div class="logo">\
+                <img alt="Логотип компании" width="100" src=' + src + '>\
+            </div> \
+        </div>';
+        appendElement(table, tableRow);
+    });
+};
+
+module.exports = renderList;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+var dateFormatter = function (add_date) {
+    var mounthArr = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'];
+    var date = new Date(add_date);
+    var date_object = {
+        year: date.getFullYear(),
+        mounth: date.getMonth(),
+        day: date.getDate()
+    };
+    return date_object.day + ' ' + mounthArr[date_object.mounth] + ' ' + date_object.year;
+};
+
+module.exports = dateFormatter;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var fetchApi = __webpack_require__(0);
+var renderList = __webpack_require__(1);
+
 const url = "https://api.zp.ru/v1/vacancies/";
 
-fetch(url)
-.then((response) => {
-	return response.json();	
-})
-.then((data) => {
-	var vacancy = data.vacancies;
-	return vacancy.map(function(item) {
-		var tableRow =  createElement('div');
-		var date = createElement('div');
-		var header = createElement('div');
-		var logo = createElement('div');
-		var headerA = createElement('a');	
-		var logoImg = createElement('img');
-		var headerSpan =  createElement('span');
-		var dateSpan =  createElement('span');
-
-		tableRow.className = "row";
-        date.className = "date";
-        header.className = "header";
-        logo.className = "logo";
-		headerA.target = "_blank";
-		headerA.href = "https://www.zarplata.ru" + item.url;
-		headerSpan.innerHTML = item.header;
-		logoImg.alt = "Логотип компании";
-		logoImg.width = 100;
-		dateSpan.innerHTML = item.add_date;
-		item.company.logo === null || item.company.logo.url === null ? logoImg.src = "static/icon/company-no-logo.svg" : logoImg.src = item.company.logo.url;
-
-		appendElement(table, tableRow);
-		appendElement(tableRow, date);
-		appendElement(date, dateSpan);
-		appendElement(tableRow, header);
-		appendElement(header, headerA);
-		appendElement(headerA, headerSpan);
-		appendElement(tableRow, logo);
-		appendElement(logo, logoImg);
-
-	})
-})
-.catch(function(error) {
-	console.error(error);
+fetchApi(url).then(data => {
+	renderList(data);
 });
-
 
 /***/ })
 /******/ ]);
