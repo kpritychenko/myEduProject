@@ -1,4 +1,8 @@
 const dateFormatter = require('./date-formatter.js');
+const vacancyUrlFormatter = require('./vacancy-url-formatter');
+const companyVacanciesCount =require('./company-vacancy-count.js');
+const changeColor = require('./color-changer.js');
+
 var createElement = function(element) {
     return document.createElement(element);
 };
@@ -6,35 +10,36 @@ var appendElement = function(parent, child) {
     return parent.appendChild(child);
 };
 
-const table = document.getElementById('vacancy-list');
+var table = document.getElementById('vacancy-list');
 
-//var cardLink = item.utl;
-
-
-var renderList = function(data) {
-    var vacancy = data.vacancies;
-    return vacancy.map(function (item) {
-        var href = "https://www.zarplata.ru" + item.url;
-        var src;
-        item.company.logo === null || item.company.logo.url === null ? src = "static/icon/company-no-logo.svg" : src = item.company.logo.url;
-        var date = dateFormatter(item.add_date);
-
+var renderItem = function(data, count) {
         var tableRow = createElement('div');
-        tableRow.innerHTML = '<div class="row"> \
+        tableRow.className = "vacancy-item";
+        tableRow.addEventListener("click", changeColor, false);
+    
+        var header = createElement('div');
+        header.className = "header";
+
+        var logo = createElement('div');
+        logo.className = "logo";
+
+        logo.innerHTML = '<img alt="Логотип компании" width="100" src=' + data.src + '>';
+        header.innerHTML = '<a target="_blank" class="vacancy-title" href="' + data.vacancyUrl + '">\
+            <span>' + data.header + '</span>\
+            </a>\
             <div class="date"> \
-                <span>'+ 'Дата добавления: <br>' +date+'</span> \
-            </div> \
-            <div class="header">\
-                <a target="_blank" href="'+href+'">\
-                    <span>'+item.header+'</span>\
-                </a>\
-            </div> \
-            <div class="logo">\
-                <img alt="Логотип компании" width="100" src='+src+'>\
-            </div> \
-        </div>';
+                <span>' + 'Дата добавления: ' + data.date +'</span> \
+                </div>';
+        if (count != undefined) {
+            var vacanciesCount = createElement('div');
+            vacanciesCount.className = "vacancies-count";
+            vacanciesCount.innerHTML = '<span>Количество вакансий компании: ' + count + '</span>';
+            appendElement(header, vacanciesCount);
+        };
         appendElement(table, tableRow);
-    });
+        appendElement(tableRow, header);
+        appendElement(tableRow, logo);
+        
 };
 
-module.exports = renderList;
+module.exports = renderItem;
