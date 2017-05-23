@@ -22,14 +22,14 @@ fetchApi(url)
 			var date = dateFormatter(item.add_date);
 			var header = item.header;
 			var renderData = {src, vacancyUrl, date, header};
-			if (item.company.id != null) {
-				var count = companyVacanciesCount(item);
-				count.then((vacanciesCount) => {
-					renderItem(renderData, vacanciesCount);
-				});
-			} else {
+			// if (item.company.id != null) {
+			// 	var count = companyVacanciesCount(item);
+			// 	count.then((vacanciesCount) => {
+			// 		renderItem(renderData, vacanciesCount);
+			// 	});
+			// } else {
 				renderItem(renderData);
-			};	
+			// };	
 			console.log(listItem);		
 		})
 			return listItem;

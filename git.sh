@@ -1,7 +1,11 @@
 #!/bin/bash 
-branch="gh-page"
+branch="gh-pages"
 git checkout "$branch"
-
-git status
-echo "kek!"
+git fetch
+git pull --rebase origin master
+npm run build
+git add .
+git commit --amend -m build
+git push --force origin "$branch"
+git checkout master
 exit 0

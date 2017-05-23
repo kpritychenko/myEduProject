@@ -1,1 +1,301 @@
-!function(n){function t(r){if(e[r])return e[r].exports;var a=e[r]={i:r,l:!1,exports:{}};return n[r].call(a.exports,a,a.exports,t),a.l=!0,a.exports}var e={};t.m=n,t.c=e,t.i=function(n){return n},t.d=function(n,e,r){t.o(n,e)||Object.defineProperty(n,e,{configurable:!1,enumerable:!0,get:r})},t.n=function(n){var e=n&&n.__esModule?function(){return n.default}:function(){return n};return t.d(e,"a",e),e},t.o=function(n,t){return Object.prototype.hasOwnProperty.call(n,t)},t.p="",t(t.s=8)}([function(n,t,e){"use strict";var r=function(n){var t=function(){return Math.floor(256*Math.random())},e="rgb("+t()+" ,"+t()+" ,"+t()+")";return this.style.background=e};n.exports=r},function(n,t,e){"use strict";var r=e(3),a="https://api.zp.ru/v1/companies/?q=",c=function(n){var t=a+n.company.id;return r(t).then(function(n){return n.companies[0].vacancies_total.active})};n.exports=c},function(n,t,e){"use strict";var r=function(n){var t=["Января","Февраля","Марта","Апреля","Мая","Июня","Июля","Августа","Сентября","Октября","Ноября","Декабря"],e=new Date(n),r={year:e.getFullYear(),mounth:e.getMonth(),day:e.getDate()};return r.day+" "+t[r.mounth]+" "+r.year};n.exports=r},function(n,t,e){"use strict";var r=function(n){return fetch(n).then(function(n){return n.json()})};n.exports=r},function(n,t,e){"use strict";var r=function(n){var t=n.url.match(/\/\w+\?/)[0],e=t.substr(0,t.length-1);return"https://www.zarplata.ru/vacancy/card/"+n.id+e};n.exports=r},function(n,t,e){"use strict";var r=e(0),a=function(){var n=function(){for(var n=document.getElementById("vacancy-list").children,t=0;t<n.length;t++)n[t].style.background="#fff",n[t].removeEventListener("click",r,!1)};return document.querySelector("a.main-logo img").addEventListener("mouseover",n)};n.exports=a},function(n,t,e){"use strict";var r=function(){var n=document.createElement("div");return n.className="loader",n.id="loader",n.innerHTML='<img src="static/img/loader/loading_spinner.gif">',document.body.appendChild(n)};n.exports=r},function(n,t,e){"use strict";var r=(e(2),e(4),e(1),e(0)),a=function(n){return document.createElement(n)},c=function(n,t){return n.appendChild(t)},o=document.getElementById("vacancy-list"),i=function(n,t){var e=a("div");e.className="vacancy-item",e.addEventListener("click",r,!1);var i=a("div");i.className="header";var u=a("div");if(u.className="logo",u.innerHTML='<img alt="Логотип компании" width="100" src='+n.src+">",i.innerHTML='<a target="_blank" class="vacancy-title" href="'+n.vacancyUrl+'">            <span>'+n.header+'</span>            </a>            <div class="date">                 <span>Дата добавления: '+n.date+"</span>                 </div>",void 0!=t){var s=a("div");s.className="vacancies-count",s.innerHTML="<span>Количество вакансий компании: "+t+"</span>",c(i,s)}c(o,e),c(e,i),c(e,u)};n.exports=i},function(n,t,e){"use strict";var r=e(2),a=e(4),c=e(1),o=e(3),i=e(7),u=(e(0),e(6)),s=e(5),l=document.getElementById("vacancy-list");s(),u(),l.style="display:none",o("https://api.zp.ru/v1/vacancies/").then(function(n){var t=n.vacancies.map(function(n){var e;e=null===n.company.logo||null===n.company.logo.url?"static/icon/company-no-logo.svg":n.company.logo.url;var o=a(n),u=r(n.add_date),s=n.header,l={src:e,vacancyUrl:o,date:u,header:s};null!=n.company.id?c(n).then(function(n){i(l,n)}):i(l),console.log(t)});return t}).then(function(n){console.log(n.length),25===n.length&&(document.getElementById("loader").remove(),l.style.display="block")})}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var changeColor = function changeColor(tableRow) {
+    var colRand = function colRand() {
+        return Math.floor(Math.random() * 256);
+    };
+    var color = 'rgb' + '(' + colRand() + ' ,' + colRand() + ' ,' + colRand() + ')';
+    return this.style.background = color;
+};
+
+module.exports = changeColor;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var fetchApi = __webpack_require__(3);
+var companiesUrl = 'https://api.zp.ru/v1/companies/?q=';
+
+var companyVacanciesCount = function companyVacanciesCount(item) {
+    var url = companiesUrl + item.company.id;
+    var count = fetchApi(url).then(function (data) {
+        return data.companies[0].vacancies_total.active;;
+    });
+    return count;
+};
+
+module.exports = companyVacanciesCount;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var dateFormatter = function dateFormatter(add_date) {
+    var mounthArr = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'];
+    var date = new Date(add_date);
+    var date_object = {
+        year: date.getFullYear(),
+        mounth: date.getMonth(),
+        day: date.getDate()
+    };
+    return date_object.day + ' ' + mounthArr[date_object.mounth] + ' ' + date_object.year;
+};
+
+module.exports = dateFormatter;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var fetchApi = function fetchApi(url) {
+    return fetch(url).then(function (response) {
+        return response.json();
+    });
+};
+module.exports = fetchApi;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var vacancyUrlFormatter = function vacancyUrlFormatter(item) {
+    var humanUrl = item.url.match(/\/\w+\?/)[0];
+    var chpu = humanUrl.substr(0, humanUrl.length - 1);
+    var vacancyUrl = "https://www.zarplata.ru" + '/vacancy/card/' + item.id + chpu;
+    return vacancyUrl;
+};
+
+module.exports = vacancyUrlFormatter;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var changeColor = __webpack_require__(0);
+
+var colorDisable = function colorDisable() {
+    var disable = function disable() {
+        var item = document.getElementById('vacancy-list').children;
+        for (var i = 0; i < item.length; i++) {
+            item[i].style.background = '#fff';
+            item[i].removeEventListener("click", changeColor, false);
+        }
+    };
+    var logo = document.querySelector('a.main-logo img');
+    return logo.addEventListener('mouseover', disable);
+};
+
+module.exports = colorDisable;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var loader = function loader() {
+    var loader = document.createElement('div');
+    loader.className = "loader";
+    loader.id = "loader";
+    loader.innerHTML = '<img src="static/img/loader/loading_spinner.gif">';
+    return document.body.appendChild(loader);
+};
+
+//var list = document.querySelector()
+
+module.exports = loader;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var dateFormatter = __webpack_require__(2);
+var vacancyUrlFormatter = __webpack_require__(4);
+var companyVacanciesCount = __webpack_require__(1);
+var changeColor = __webpack_require__(0);
+
+var createElement = function createElement(element) {
+    return document.createElement(element);
+};
+var appendElement = function appendElement(parent, child) {
+    return parent.appendChild(child);
+};
+
+var table = document.getElementById('vacancy-list');
+
+var renderItem = function renderItem(data, count) {
+    var tableRow = createElement('div');
+    tableRow.className = "vacancy-item";
+    tableRow.addEventListener("click", changeColor, false);
+
+    var header = createElement('div');
+    header.className = "header";
+
+    var logo = createElement('div');
+    logo.className = "logo";
+
+    logo.innerHTML = '<img alt="Логотип компании" width="100" src=' + data.src + '>';
+    header.innerHTML = '<a target="_blank" class="vacancy-title" href="' + data.vacancyUrl + '">\
+            <span>' + data.header + '</span>\
+            </a>\
+            <div class="date"> \
+                <span>' + 'Дата добавления: ' + data.date + '</span> \
+                </div>';
+    if (count != undefined) {
+        var vacanciesCount = createElement('div');
+        vacanciesCount.className = "vacancies-count";
+        vacanciesCount.innerHTML = '<span>Количество вакансий компании: ' + count + '</span>';
+        appendElement(header, vacanciesCount);
+    };
+    appendElement(table, tableRow);
+    appendElement(tableRow, header);
+    appendElement(tableRow, logo);
+};
+
+module.exports = renderItem;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var dateFormatter = __webpack_require__(2);
+var vacancyUrlFormatter = __webpack_require__(4);
+var companyVacanciesCount = __webpack_require__(1);
+var fetchApi = __webpack_require__(3);
+var renderItem = __webpack_require__(7);
+var changeColor = __webpack_require__(0);
+var loader = __webpack_require__(6);
+var colorDisable = __webpack_require__(5);
+
+var table = document.getElementById('vacancy-list');
+var url = "https://api.zp.ru/v1/vacancies/";
+
+colorDisable();
+loader();
+table.style = 'display:none';
+fetchApi(url).then(function (data) {
+	var listItem = data.vacancies.map(function (item) {
+		var src;
+		item.company.logo === null || item.company.logo.url === null ? src = "static/icon/company-no-logo.svg" : src = item.company.logo.url;
+		var vacancyUrl = vacancyUrlFormatter(item);
+		var date = dateFormatter(item.add_date);
+		var header = item.header;
+		var renderData = { src: src, vacancyUrl: vacancyUrl, date: date, header: header };
+		if (item.company.id != null) {
+			var count = companyVacanciesCount(item);
+			count.then(function (vacanciesCount) {
+				renderItem(renderData, vacanciesCount);
+			});
+		} else {
+			renderItem(renderData);
+		};
+		console.log(listItem);
+	});
+	return listItem;
+}).then(function (listItem) {
+	console.log(listItem.length);
+	if (listItem.length === 25) {
+		document.getElementById('loader').remove();
+		table.style.display = 'block';
+	}
+});
+
+/***/ })
+/******/ ]);
+//# sourceMappingURL=build.js.map
