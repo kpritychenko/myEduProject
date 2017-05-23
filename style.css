@@ -54,6 +54,7 @@ div {
  	font-family: Lato,Helvetica Neue,Arial,Helvetica,sans-serif;
 	font-size: 14px;
 	color: #757575;
+	display: flex;
 }
 .vacancy-title {
 	text-decoration-line: none;
@@ -70,6 +71,14 @@ div {
 	margin: 40%
 }
 .loader img {
+	width: 100%;
+    height: 100%;
+}
+.loader-count{
+	width: 30px;
+	height: 30px
+}
+.loader-count img {
 	width: 100%;
     height: 100%;
 }

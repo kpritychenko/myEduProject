@@ -2,6 +2,7 @@ const dateFormatter = require('./date-formatter.js');
 const vacancyUrlFormatter = require('./vacancy-url-formatter');
 const companyVacanciesCount =require('./company-vacancy-count.js');
 const changeColor = require('./color-changer.js');
+const loaderCount = require('./loader-count.js');
 
 var createElement = function(element) {
     return document.createElement(element);
@@ -12,7 +13,7 @@ var appendElement = function(parent, child) {
 
 var table = document.getElementById('vacancy-list');
 
-var renderItem = function(data, count) {
+var renderItem = function(data, companyId) {
         var tableRow = createElement('div');
         tableRow.className = "vacancy-item";
         tableRow.addEventListener("click", changeColor, false);
@@ -29,16 +30,20 @@ var renderItem = function(data, count) {
             </a>\
             <div class="date"> \
                 <span>' + 'Дата добавления: ' + data.date +'</span> \
-                </div>';
-        if (count != undefined) {
+            </div>';
+        if (companyId != null) { 
             var vacanciesCount = createElement('div');
             vacanciesCount.className = "vacancies-count";
-            vacanciesCount.innerHTML = '<span>Количество вакансий компании: ' + count + '</span>';
+            vacanciesCount.innerHTML = '<span>Количество вакансий компании: </span>'; 
             appendElement(header, vacanciesCount);
+            var loader = loaderCount(vacanciesCount);
         };
         appendElement(table, tableRow);
         appendElement(tableRow, header);
         appendElement(tableRow, logo);
+        
+        var vCount = {vacanciesCount, loader};
+        return vCount;
         
 };
 

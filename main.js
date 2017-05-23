@@ -21,21 +21,21 @@ fetchApi(url)
 			var vacancyUrl = vacancyUrlFormatter(item);
 			var date = dateFormatter(item.add_date);
 			var header = item.header;
+			var companyId = item.company.id;
 			var renderData = {src, vacancyUrl, date, header};
-			if (item.company.id != null) {
-				var count = companyVacanciesCount(item);
-				count.then((vacanciesCount) => {
-					renderItem(renderData, vacanciesCount);
+			var vCount = renderItem(renderData, companyId);
+
+			if (companyId != null) {
+				var count = companyVacanciesCount(companyId);
+				count.then((count) => {
+					vCount.loader.remove();
+					vCount.vacanciesCount.innerHTML = '<span>Количество вакансий компании: ' + count + '</span>'; 
 				});
-			} else {
-				renderItem(renderData);
-			};	
-			console.log(listItem);		
+			}
 		})
-			return listItem;
+		return listItem;
 	})
 	.then((listItem) => {
-		console.log(listItem.length);
 		if (listItem.length === 25) {
 			document.getElementById('loader').remove();
 			table.style.display = 'block';
